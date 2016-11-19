@@ -1,0 +1,137 @@
+<html>
+
+<head>
+<meta http-equiv=Content-Type content="text/html; charset=windows-1252">
+<meta name=Generator content="Microsoft Word 15 (filtered)">
+<style>
+<!--
+ /* Font Definitions */
+ @font-face
+	{font-family:Calibri;
+	panose-1:2 15 5 2 2 2 4 3 2 4;}
+@font-face
+	{font-family:"Segoe UI Light";
+	panose-1:2 11 5 2 4 2 4 2 2 3;}
+@font-face
+	{font-family:"Segoe UI";
+	panose-1:2 11 5 2 4 2 4 2 2 3;}
+ /* Style Definitions */
+ p.MsoNormal, li.MsoNormal, div.MsoNormal
+	{margin-top:0in;
+	margin-right:0in;
+	margin-bottom:8.0pt;
+	margin-left:0in;
+	line-height:107%;
+	font-size:11.0pt;
+	font-family:"Calibri",sans-serif;}
+h2
+	{mso-style-link:"Heading 2 Char";
+	margin-right:0in;
+	margin-left:0in;
+	font-size:18.0pt;
+	font-family:"Times New Roman",serif;
+	font-weight:bold;}
+a:link, span.MsoHyperlink
+	{color:blue;
+	text-decoration:underline;}
+a:visited, span.MsoHyperlinkFollowed
+	{color:#954F72;
+	text-decoration:underline;}
+p
+	{margin-right:0in;
+	margin-left:0in;
+	font-size:12.0pt;
+	font-family:"Times New Roman",serif;}
+span.Heading2Char
+	{mso-style-name:"Heading 2 Char";
+	mso-style-link:"Heading 2";
+	font-family:"Times New Roman",serif;
+	font-weight:bold;}
+span.apple-converted-space
+	{mso-style-name:apple-converted-space;}
+.MsoChpDefault
+	{font-family:"Calibri",sans-serif;}
+.MsoPapDefault
+	{margin-bottom:8.0pt;
+	line-height:107%;}
+@page WordSection1
+	{size:8.5in 11.0in;
+	margin:1.0in 1.0in 1.0in 1.0in;}
+div.WordSection1
+	{page:WordSection1;}
+-->
+</style>
+
+</head>
+
+<body lang=EN-US link=blue vlink="#954F72">
+
+<div class=WordSection1>
+
+<p class=MsoNormal style='margin-bottom:.05in;line-height:normal;background:
+white'><b><span style='font-size:25.5pt;font-family:"Segoe UI Light",sans-serif;
+color:#333333'>Getting and setting item properties for a compose add-in</span></b></p>
+
+<p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;background:white'><b><span style='font-size:10.5pt;font-family:"Segoe UI",sans-serif;
+color:#333333'>In a compose form, you can get most of the</span></b><span
+style='font-size:10.5pt;font-family:"Segoe UI",sans-serif;color:#333333'>
+properties that are exposed on the same kind of item as in a read form (such as
+attendees, recipients, subject, and body), and you can get a few extra properties
+that are relevant in only a compose form but not a read form (body, bcc).</span></p>
+
+<p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;background:white'><span style='font-size:10.5pt;font-family:"Segoe UI",sans-serif;
+color:#333333'>For most of these properties, because it's possible that an
+Outlook add-in and the user can be modifying the </span><span style='font-size:
+16.0pt;font-family:"Segoe UI",sans-serif;color:red'>same property in the user
+interface at</span><span style='font-size:10.5pt;font-family:"Segoe UI",sans-serif;
+color:red'> </span><span style='font-size:10.5pt;font-family:"Segoe UI",sans-serif;
+color:#333333'>the same time, the methods to get and set them are asynchronous.
+Table 1 lists the item-level properties and corresponding asynchronous methods
+to get and set them in a compose form. The&nbsp;<a
+href="https://dev.office.com/docs/reference/outlook/Office.context.mailbox.item.htm"><span
+style='color:#1570A6'>item.itemType</span></a>&nbsp;and&nbsp;<a
+href="https://dev.office.com/docs/reference/outlook/Office.context.mailbox.item.htm"><span
+style='color:#1570A6'>item.conversationId</span></a>&nbsp;properties are
+exceptions because users cannot modify them. You can programmatically get them
+the same way in a compose form as in a read form, directly from the parent
+object.</span></p>
+
+<p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;background:white'><span style='font-size:10.5pt;font-family:"Segoe UI",sans-serif;
+color:#333333'>Other than accessing item properties in the JavaScript API for
+Office, you can access item-level properties using Exchange Web Services (EWS).
+With the<b>ReadWriteMailbox</b>&nbsp;permission, you can use the&nbsp;<a
+href="https://dev.office.com/docs/reference/outlook/Office.context.mailbox.htm"><span
+style='color:#1570A6'>mailbox.makeEwsRequestAsync</span></a>&nbsp;method to
+access EWS operations,&nbsp;<a
+href="http://msdn.microsoft.com/en-us/library/e3590b8b-c2a7-4dad-a014-6360197b68e4%28Office.15%29.aspx"
+target="_blank"><span style='color:#1570A6'>GetItem</span></a>&nbsp;and&nbsp;<a
+href="http://msdn.microsoft.com/en-us/library/5d027523-e0bc-4da2-b60b-0cb9fc1fdfe4%28Office.15%29.aspx"
+target="_blank"><span style='color:#1570A6'>UpdateItem</span></a>, to get and
+set more properties of an item or items in the user's mailbox.&nbsp;<b>makeEwsRequestAsync</b>&nbsp;is
+available in both compose and read forms. For more information about the&nbsp;<b>ReadWriteMailbox</b>&nbsp;permission,
+and accessing EWS through the Office Add-ins platform, see&nbsp;</span><a
+href="https://dev.office.com/docs/add-ins/outlook/understanding-outlook-add-in-permissions.htm"><span
+style='font-size:10.5pt;font-family:"Segoe UI",sans-serif;color:#1570A6'>Understanding
+Outlook add-in permissions</span></a><span style='font-size:10.5pt;font-family:
+"Segoe UI",sans-serif;color:#333333'>&nbsp;and&nbsp;</span><a
+href="https://dev.office.com/docs/add-ins/outlook/web-services.htm"><span
+style='font-size:10.5pt;font-family:"Segoe UI",sans-serif;color:#1570A6'>Call
+web services from an Outlook add-in</span></a><span style='font-size:10.5pt;
+font-family:"Segoe UI",sans-serif;color:#333333'>.</span></p>
+
+<p class=MsoNormal>&nbsp;</p>
+
+<p class=MsoNormal><img border=0 width=403 height=338 id="Picture 1"
+src="~WRS%7b2D680685-6287-44CF-BDB5-FBF6613A2401%7d_files/image001.jpg"
+alt="Image result for cat"></p>
+
+<p class=MsoNormal>&nbsp;</p>
+
+</div>
+
+</body>
+
+</html>

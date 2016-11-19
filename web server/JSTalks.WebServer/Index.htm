@@ -1,0 +1,43 @@
+﻿<!DOCTYPE html>
+<html>
+<body>
+    <h1>JS Talks Blog</h1>
+    <div id="container"></div>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+
+    <script>
+        $(document).ready(updateData);
+
+        function updateData() {
+            $.get("Posts/posts.txt").done(function (data) {
+
+                var html = "<ul style='list-style: none;'>";
+                $.each(data.split("\n"), function (i, post) {
+                    html += "<li><h2 style='cursor:pointer'>" + post.replace(".htm", "") + "</h2></li>";
+                });
+                html += "</ul>";
+
+                $("#container").html(html).find("li > h2").click(function () {
+                    var $postContainer = $(this).parent();
+                    var $postBody = $postContainer.find(".post-body");
+                    if ($postBody.length) {
+                        $postBody.slideUp("normal", function () {
+                            $(this).remove();
+                        });
+                    }
+                    else {
+                        var postUrl = $postContainer.find("h2").text() + ".htm";
+                        $.get("posts/" + postUrl).done(function (postHtml) {
+                            postHtml = postHtml.substring(postHtml.indexOf("<body"));
+                            postHtml = postHtml.substring(0, postHtml.indexOf("</body>"));
+                            var $postBody = $("<div class='post-body' style='display:none'>" + postHtml + "</div>");
+                            $postContainer.append($postBody);
+                            $postBody.slideDown("normal");
+                        });
+                    }
+                });
+            });
+        }
+    </script>
+</body>
+</html>
